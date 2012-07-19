@@ -1,0 +1,20 @@
+﻿<h2>Articles &amp Press Releases</h2><br>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Date</th>
+			<th>Article Name</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @articles.each do |article| %>
+		<tr>
+			<td><strong><%= article.published.strftime("%B %d, %Y") %></strong></td>
+			<td><h3><%= link_to truncate(article.title, :length => 80), article_path(article) %></h3>
+					<p> <%= truncate(article.body, :length => 400)%>
+					<%= link_to "Read More", article_path(article) %></p></td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>

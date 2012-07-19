@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PIC Appalachia</title>
+	<link href='http://fonts.googleapis.com/css?family=Actor' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="container">
+
+<!-- TOP NAVIGATION BAR -->
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+	  <ul class="nav">
+	    <li><a href="<%= root_path %>">Home</a></li>
+			<li><a href="<%= articles_path %>">News</a></li>
+			<li><a href="<%= contact_path %>">Contact</a></li>
+			<li><a href="<%= about_path %>">About</a></li>
+			<li>
+				<div class="btn-group">
+					<a class="btn btn-action dropdown-toggle" data-toggle="dropdown" href="#">
+				Products
+				<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="<%= products_path %>">Browse All</a></li>
+					<li><a href="<%= categories_path %>">Browse by Category</a></li>
+					<li><a href="<%= manufacturers_path %>">Browse by Manufacturer</a></li>
+				</ul>
+				</div>
+			</li>
+	  </ul>
+		<form class="navbar-search pull-right" action>
+			<input type="text" class="search-query span2" placeholder="Search">
+		</form>
+	</div>
+  </div>
+</div>
+<!-- END TOP NAVIGATION BAR -->
+
+<!-- BEGIN MAIN TITLE SPACE -->
+<div class="page-header centered pushdown">
+  <h1 class="jumbotron">Power Ignition &amp; Controls Appalachia</h1>
+  <p class="lead">Achieve your operational &amp; environmental compliance goals with our products, services &amp; solutions.</p>
+</div>
+<!-- END MAIN TITLE SPACE -->
+
+<!-- MIDPAGE NAVIGATION -->
+<div class="row center-nav">
+  <div class="span4">
+    <h3>Product Categories</h3>
+	<ul class="unstyled center-nav-ul">
+	  <% for @cat in Category.all.sample(5) %>
+		<li class="center-link">
+		  <strong><a href="<%= category_path(@cat) %>"><%= truncate(@cat.name, :length => 33)  %></a></strong>
+		</li>
+	  <% end %>
+	</ul>
+	<a class="btn" href="<%= categories_path %>">See all</a>
+  </div>
+
+  <div class="span4">
+    <h3>Product Manufacturers</h3>
+	<ul class="unstyled center-nav-ul">
+	  <% for @man in Manufacturer.all.sample(5) %>
+		<li class="center-link">
+		  <strong><a href="<%= manufacturer_path(@man) %>"><%= truncate(@man.name, :length => 33) %></a></strong>
+		</li>
+	  <% end %>
+	</ul>
+	<a class="btn" href="<%= manufacturers_path %>">See all</a>
+  </div>
+  <div class="span3 offset1">
+  <h3>Recent News</h3>
+    <div class="well">
+	  <ul>
+			<% for @art in Article.order("published DESC").all[0...5] %>
+				<li><a href="<%= article_path(@art) %>"><%= @art.published.strftime("%B %d, %Y") %></li>
+			<% end %>
+	  </ul>
+	  <a class="btn btn-info" href="<%= articles_path %>">All Press Releases</a>
+    </div>
+  </div>
+</div>
+<!-- END MIDPAGE NAVIGATION -->
+
+<!-- MAIN BODY -->
+<%= yield %>
+<!-- END MAIN BODY -->
+
+<!-- FOOTER BODY -->
+<div class="footer pushdown">
+  <div class="row">
+	<div class="span4">
+		<p>Copyright &copy; 2012 Power Ignition &amp; Controls Appalachia. All Rights Reserved. <a href="#">Terms &amp; Conditions</a>.</p>
+	</div>
+	<div class="span4 offset4">
+	  <address>
+          <strong>Power Ignition And Controls Appalachia</strong><br>
+          210 Riverview Drive<br>
+          Monessen, PA, USA 15062<br>
+          www.pic-appalachia.com<br>
+		  (724) 746-5870
+	  </address>
+	</div>
+  </div>
+
+</div>
+<!-- END FOOTER -->
+
+</div>
+</body>
+</html>

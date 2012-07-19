@@ -1,0 +1,7 @@
+<h2>Listing Categories</h2>
+
+<ul class="unstyled">
+<% @categories.each do |category| %>
+  <li><a href="<%= category_path(category) %>"><%= category.name %></a></li>
+<% end %>
+</ul>

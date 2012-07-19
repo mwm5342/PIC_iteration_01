@@ -1,0 +1,32 @@
+<h2><a href="<%= products_path %>">Products</a> > <%= @product.name %></h2>
+
+<div class="row">
+	<div class="span5 well">
+	  <% if !@product.picture? %>
+	    <em>Picture Not Available</em>
+	  <% else %>
+	    <a class="centered" href="<%= @product.picture.url %>"><%= image_tag @product.picture.url %></a>
+	  <% end %>
+	</div>
+	<div class="span6">
+		<h4>Description</h4><br>
+		<p><%= @product.description %></p>
+	</div>
+</div>
+
+	<table class="table">
+		<tr>
+			<th>Model</th>
+			<td><code><%= @product.model %></code></td>
+		<tr>
+			<th>Category</th>
+		<td><%= @product.category.name %></td>
+		</tr>
+		<tr>
+			<th>Manufacturer</th>
+		<td><%= @product.manufacturer.name %></td>
+		</tr>
+	</table>
+
+
+<a class="btn btn-primary" href="<%= products_path %>">Back</a>
